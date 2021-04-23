@@ -29,19 +29,19 @@ def fetchWaveform(args):
         orderId = res['orderId']
 
     # check order
-    #res = getOrderStatus(email, password, orderId)
-    #if res['status'] == 'Error':
-    #    return
-    #else:
-    #    url = res['url']
+    res = getOrderStatus(email, password, orderId)
+    if res['status'] == 'Error':
+        return
+    else:
+        url = res['url']
         
     # fetch
-    #download(url)
+    download(url)
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='fetchWaveform',
-    epilog='Example: python fetchWaveform.py -u chute@earth.sinica.edu.tw -p 27839910#2705 -format mseed -tb 2008-02-17T20:31:00 -te 2008-02-17T20:41:00 -proj 2008NSN,2008NSS -net TW -sta all -loc all -cha HHZ -label 20080217203100')
+    epilog='Example: python fetchWaveform.py -u email -p password -format mseed -tb 2008-02-17T20:31:00 -te 2008-02-17T20:41:00 -proj 2008NSN,2008NSS -net TW -sta all -loc all -cha HHZ -label 20080217203100')
     parser.add_argument('-format', metavar='format', type=str, nargs='+',
                         help='-format mseed', dest='format', required=True)
     parser.add_argument('-tb', metavar='time begin', type=str, nargs='+',
@@ -61,8 +61,8 @@ if __name__ == '__main__':
     parser.add_argument('-label', metavar='label', type=str, nargs='+',
                         help='-label 20080217203100', dest='label', required=True)
     parser.add_argument('-u', metavar='email', type=str, nargs='+',
-                        help='-u chute@earth.sinica.edu.tw', dest='u', required=True)
+                        help='-u email', dest='u', required=True)
     parser.add_argument('-p', metavar='password', type=str, nargs='+',
-                        help='-p 27839910#2705', dest='p', required=True)
+                        help='-p password', dest='p', required=True)
     args = parser.parse_args()
     fetchWaveform(args)
